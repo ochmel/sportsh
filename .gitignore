@@ -1,0 +1,9 @@
+.gradle
+.idea
+/gradle
+gradlew
+gradlew.bat
+frontend/node_modules
+*build
+
+
