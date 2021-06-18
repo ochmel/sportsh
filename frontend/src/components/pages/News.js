@@ -10,8 +10,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import {getText} from "../../translations";
 
 graph.setVersion("7.0")
-const token = 'EAADZC3drEYvkBAHETgqJYwrFl40vv4ZCDOgdiyedKrSPvBJtlZCDNfPIMo0bb9biSLtbEZAjtusvBSuKjR0W6WuNTHdBQ9kP8rEjCXevZAL3ABP7HaHzTZBkhQ2puddK89ZBg3LpvfG31BnBQSZAv9rrW84JqSYq5KNqvgKZAoG9G3AZDZD';
-graph.setAccessToken(token);
+graph.setAccessToken(process.env.REACT_APP_FB_TOKEN);
 
 export default function News({isCzech})
 {
