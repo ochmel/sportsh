@@ -1,7 +1,21 @@
 defaultTasks 'build'
 
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+}
+
 wrapper {
     description "Regenerates the Gradle Wrapper files"
     gradleVersion = '7.0'
-    distributionUrl = "http://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
+    distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
 }

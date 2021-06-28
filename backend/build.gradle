@@ -8,17 +8,13 @@ group = 'cz.cvut.sh.sport'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     runtimeOnly project(':frontend')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
-    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
@@ -27,3 +23,11 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+task copyWebApp(type: Copy) {
+    from "$rootDir/frontend/build"
+    into "$rootDir/backend/build/resources/main/static/."
+}
+
+bootJar.dependsOn(copyWebApp)
+compileJava.dependsOn ":frontend:build"
