@@ -26,30 +26,19 @@ import {getText} from "../../../translations";
 
 let siliconGymViews = ["http://kamery-nahled.sh.cvut.cz/fit2-stred.jpg", "http://kamery-nahled.sh.cvut.cz/fit2-drepy.jpg", "http://kamery-nahled.sh.cvut.cz/fit2-scott.jpg"]
 
-export default function SiliconGym({isCzech})
-{
+export default function SiliconGym({isCzech}) {
     const classes = useStyles();
     const [tabIndex, setTabIndex] = useState(0);
     const [expanded, setExpanded] = useState(false);
-    const [cameraUrls, setCameraUrls] = useState(siliconGymViews);
+    const [timestamp, setTimestamp] = useState(Date.now);
 
-    function handleTabChange(index)
-    {
+    function handleTabChange(index) {
         setTabIndex(index);
         setExpanded(true);
     }
 
-    useEffect(() =>
-    {
-        let interval = setInterval(() =>
-        {
-            let timestamp = Date.now();
-            setCameraUrls([
-                siliconGymViews[0] + '?timestamp=' + timestamp,
-                siliconGymViews[1] + '?timestamp=' + timestamp,
-                siliconGymViews[2] + '?timestamp=' + timestamp
-            ])
-        }, 7000)
+    useEffect(() => {
+        let interval = setInterval(() => setTimestamp(Date.now), 7000)
         return () => clearInterval(interval)
     })
 
@@ -120,9 +109,15 @@ export default function SiliconGym({isCzech})
                 </TabPanel>
                 <TabPanel index={tabIndex} value={2} className={classes.article}>
                     <div className={classes.cameras}>
-                        <img className={classes.camera} src={cameraUrls[0]} alt={getText('sgView1', isCzech)}/>
-                        <img className={classes.camera} src={cameraUrls[1]} alt={getText('sgView2', isCzech)}/>
-                        <img className={classes.camera} src={cameraUrls[2]} alt={getText('sgView3', isCzech)}/>
+                        <img className={classes.camera}
+                             src={new URL(siliconGymViews[0]).toString() + "?timestamp=" + timestamp}
+                             alt={getText('sgView1', isCzech)}/>
+                        <img className={classes.camera}
+                             src={new URL(siliconGymViews[1]).toString() + "?timestamp=" + timestamp}
+                             alt={getText('sgView2', isCzech)}/>
+                        <img className={classes.camera}
+                             src={new URL(siliconGymViews[2]).toString() + "?timestamp=" + timestamp}
+                             alt={getText('sgView3', isCzech)}/>
                     </div>
                 </TabPanel>
                 <TabPanel index={tabIndex} value={3} className={classes.article}>
