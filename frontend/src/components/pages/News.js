@@ -78,8 +78,8 @@ export default function News({isCzech})
         const message = isCzech ? messageParts[0] : messageParts[1];
 
         return (
-            <CardContent className={post.full_picture ? classes.postMessage : classes.messageOnly}>
-                <Typography variant='h6'>{message}</Typography>
+            <CardContent className={post.full_picture ? classes.postCard : undefined}>
+                <Typography className={classes.postMessage} variant='h6'>{message}</Typography>
             </CardContent>
         )
     }
@@ -93,13 +93,12 @@ export default function News({isCzech})
             <div className={classes.postsContainer}>
                 {postsWrapper
                     ?
-                    <React.Fragment>
+                    <>
                         {postsWrapper.data.slice(0, displayedPostsCount).map((post, index) => getPostElement(post, index))}
-
                         <Link onClick={showMore} color='primary' className={classes.expand}>
                             {getText('showMore', isCzech)} <ExpandMoreIcon/>
                         </Link>
-                    </React.Fragment>
+                    </>
                     : fbError
                         ? <Typography variant='h6' color='primary'>{getText('newsError', isCzech)}</Typography>
                         : <CircularProgress/>
@@ -157,11 +156,13 @@ const useStyles = makeStyles((theme) => ({
     postImage: {
         width: '100%',
     },
-    postMessage: {
+    postCard: {
         maxWidth: '100%',
         overflowWrap: "break-word",
     },
-    messageOnly: {},
+    postMessage: {
+        whiteSpace: "pre-wrap"
+    },
     expand: {
         fontWeight: 'bold',
         fontSize: 20,
