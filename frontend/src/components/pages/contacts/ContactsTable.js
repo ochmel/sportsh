@@ -5,23 +5,18 @@ import AddIcon from "@material-ui/icons/Add";
 import {ContactsTableRow} from "./ContactsTableRow";
 import DragTable from "./DragDropContainer";
 
-export const ContactsTable = React.memo(function ContactsTable({isCzech, contacts, setContacts, setSnack, dragDrop})
-{
-    function findHighestId(contacts)
-    {
+export const ContactsTable = React.memo(function ContactsTable({isCzech, contacts, setContacts, setSnack, dragDrop}) {
+    function findHighestId(contacts) {
         let highest = 1;
-        for (const contact of contacts)
-        {
-            if (contact.id > highest)
-            {
+        for (const contact of contacts) {
+            if (contact.id > highest) {
                 highest = contact.id
             }
         }
         return highest;
     }
 
-    function addContact()
-    {
+    function addContact() {
         setContacts([{
             id: findHighestId(contacts) + 1,
             photoId: "",
@@ -38,15 +33,13 @@ export const ContactsTable = React.memo(function ContactsTable({isCzech, contact
         }, ...contacts])
     }
 
-    function updateContact(index, updated, shouldSave)
-    {
+    function updateContact(index, updated, shouldSave) {
         let updatedContacts = [...contacts];
         updatedContacts[index] = updated;
         setContacts(updatedContacts, shouldSave);
     }
 
-    function remove(index)
-    {
+    function remove(index) {
         let copy = [...contacts];
         copy.splice(index, 1)
         setContacts(copy)

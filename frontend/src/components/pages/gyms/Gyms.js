@@ -49,8 +49,7 @@ export const AccordionDetails = withStyles({
     },
 })(MuiAccordionDetails);
 
-export default function Gyms({isCzech})
-{
+export default function Gyms({isCzech}) {
     const classes = useStyles();
 
     return (

@@ -11,14 +11,12 @@ import {getText} from "../../../translations";
 import Gallery from "../../Gallery";
 import bo1 from "../../../resources/boulder/2.jpg";
 
-export default function Boulder({isCzech})
-{
+export default function Boulder({isCzech}) {
     const classes = useStyles();
     const [tabIndex, setTabIndex] = useState(0);
     const [expanded, setExpanded] = useState(false);
 
-    function handleTabChange(index)
-    {
+    function handleTabChange(index) {
         setTabIndex(index);
         setExpanded(true);
     }

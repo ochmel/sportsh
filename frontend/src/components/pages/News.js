@@ -12,48 +12,37 @@ import {getText} from "../../translations";
 graph.setVersion("7.0")
 graph.setAccessToken(process.env.REACT_APP_FB_TOKEN);
 
-export default function News({isCzech})
-{
+export default function News({isCzech}) {
     const classes = useStyles();
     const [postsWrapper, setPostsWrapper] = useState(null);
     const [displayedPostsCount, setDisplayedPostsCount] = useState(5)
     const [fbError, setFbError] = useState(false);
-    useEffect(() =>
-    {
-        graph.get("386058205223204/posts?fields=full_picture,message,permalink_url", (error, response) =>
-        {
-            if (error != null)
-            {
+    useEffect(() => {
+        graph.get("386058205223204/posts?fields=full_picture,message,permalink_url", (error, response) => {
+            if (error != null) {
                 setFbError(true);
-            } else
-            {
+            } else {
                 setPostsWrapper(response)
             }
         });
     }, [])
 
-    function routeToFb(link)
-    {
+    function routeToFb(link) {
         window.open(link, '_blank')
     }
 
-    function showMore()
-    {
+    function showMore() {
         let newCount = displayedPostsCount + 5;
-        if (newCount > postsWrapper.data.length)
-        {
-            graph.get(postsWrapper.paging.next, (error, response) =>
-            {
+        if (newCount > postsWrapper.data.length) {
+            graph.get(postsWrapper.paging.next, (error, response) => {
                 setPostsWrapper({...postsWrapper, data: [...postsWrapper.data, ...response.data]});
             })
         }
         setDisplayedPostsCount(newCount);
     }
 
-    function getPostElement(post, index)
-    {
-        if (!post.full_picture && !post.message)
-        {
+    function getPostElement(post, index) {
+        if (!post.full_picture && !post.message) {
             return <React.Fragment/>
         }
 
@@ -67,10 +56,8 @@ export default function News({isCzech})
         )
     }
 
-    function getPostMessage(post)
-    {
-        if (!post.message)
-        {
+    function getPostMessage(post) {
+        if (!post.message) {
             return <React.Fragment/>
         }
 

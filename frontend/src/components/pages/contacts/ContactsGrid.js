@@ -9,12 +9,10 @@ import {getPositionTranslation, getText} from "../../../translations";
 import CardContent from "@material-ui/core/CardContent";
 import {getPhotoUrl} from "../../../functions";
 
-export default function ContactsGrid({isCzech, contacts})
-{
+export default function ContactsGrid({isCzech, contacts}) {
     const classes = useStyles();
 
-    function setUpContacts(contacts)
-    {
+    function setUpContacts(contacts) {
         const contactsMap = {
             management: [],
             instructors: [],
@@ -24,30 +22,23 @@ export default function ContactsGrid({isCzech, contacts})
             blockGymsAdmins: [],
         }
 
-        for (const contact of contacts)
-        {
-            if (contact.manager)
-            {
+        for (const contact of contacts) {
+            if (contact.manager) {
                 contactsMap.management.push(contact);
             }
-            if (contact.instructor)
-            {
+            if (contact.instructor) {
                 contactsMap.instructors.push(contact);
             }
-            if (contact.masseur)
-            {
+            if (contact.masseur) {
                 contactsMap.masseurs.push(contact);
             }
-            if (contact.trainer)
-            {
+            if (contact.trainer) {
                 contactsMap.trainers.push(contact);
             }
-            if (contact.siliconGym)
-            {
+            if (contact.siliconGym) {
                 contactsMap.siliconGymAdmins.push(contact);
             }
-            if (contact.blockGym)
-            {
+            if (contact.blockGym) {
                 contactsMap.blockGymsAdmins.push(contact);
             }
         }
@@ -55,8 +46,7 @@ export default function ContactsGrid({isCzech, contacts})
         return contactsMap;
     }
 
-    function generateGrid(contactsMap)
-    {
+    function generateGrid(contactsMap) {
         return (
             <React.Fragment>
                 {getSeparator('management')}
@@ -75,8 +65,7 @@ export default function ContactsGrid({isCzech, contacts})
         )
     }
 
-    function getSeparator(text)
-    {
+    function getSeparator(text) {
         return (
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <Card className={classes.separatorCard}>
@@ -88,8 +77,7 @@ export default function ContactsGrid({isCzech, contacts})
         )
     }
 
-    function getCard(contact, showFunctions)
-    {
+    function getCard(contact, showFunctions) {
         return (
             <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
                 <Card className={classes.card} elevation={9} classes={{root: classes.cardRoot}}>

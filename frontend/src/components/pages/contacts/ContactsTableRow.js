@@ -13,53 +13,48 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
-export const ContactsTableRow = React.memo(function ContactsTableRow({contact, isCzech, setSnack, updateContact, remove})
-{
+export const ContactsTableRow = React.memo(function ContactsTableRow({
+                                                                         contact,
+                                                                         isCzech,
+                                                                         setSnack,
+                                                                         updateContact,
+                                                                         remove
+                                                                     }) {
     const classes = useStyles();
     const photoUrl = getPhotoUrl(contact.photoId);
 
-    function clickOnImage()
-    {
+    function clickOnImage() {
         document.querySelector('#i' + contact.id).click();
     }
 
-    function handleChange(event)
-    {
+    function handleChange(event) {
         const target = event.target;
         update(target.name, target.value);
     }
 
-    function update(name, value)
-    {
+    function update(name, value) {
         let updatedData = {...contact, [name]: value}
         updateContact(updatedData, name === 'photoId')
     }
 
-    function changeFunction(functionIndex, value)
-    {
+    function changeFunction(functionIndex, value) {
         let updatedData = {...contact};
         updatedData.functions[functionIndex] = value;
         updateContact(updatedData);
     }
 
-    function handleImageChanged(file)
-    {
-        if (file.type.indexOf("image") !== -1)
-        {
-            if (file.size > 400000)
-            {
+    function handleImageChanged(file) {
+        if (file.type.indexOf("image") !== -1) {
+            if (file.size > 400000) {
                 setSnack({message: getText('photoTooBig', isCzech), open: true, severity: 'error'})
-            } else
-            {
+            } else {
                 uploadImage(file)
             }
         }
     }
 
-    function uploadImage(image)
-    {
-        if (!!contact.photoId)
-        {
+    function uploadImage(image) {
+        if (!!contact.photoId) {
             deleteExistingPhoto(contact.photoId);
         }
 
@@ -69,35 +64,27 @@ export const ContactsTableRow = React.memo(function ContactsTableRow({contact, i
             method: 'post',
             mode: 'cors',
             body: formData,
-        }).then(response =>
-        {
-            if (response.ok)
-            {
-                response.text().then(fileId =>
-                {
+        }).then(response => {
+            if (response.ok) {
+                response.text().then(fileId => {
                     update('photoId', fileId)
                     setSnack({message: getText('photoUpload', isCzech), open: true, severity: 'success'})
                 })
-            } else
-            {
+            } else {
                 setSnack({message: getText('photoUploadError', isCzech), open: true, severity: 'error'})
             }
         })
     }
 
-    function deleteExistingPhoto(photoId)
-    {
+    function deleteExistingPhoto(photoId) {
         fetch('/files/' + photoId, {
             method: 'delete',
             mode: 'cors',
-        }).then(response =>
-        {
-            if (response.ok)
-            {
+        }).then(response => {
+            if (response.ok) {
                 setSnack({message: getText('oldPhotoDeleted', isCzech), open: true, severity: 'success'})
 
-            } else
-            {
+            } else {
                 setSnack({message: getText('oldPhotoNotDeleted', isCzech), open: true, severity: 'error'})
             }
         })
@@ -140,51 +127,51 @@ export const ContactsTableRow = React.memo(function ContactsTableRow({contact, i
                     <Tooltip title="Vedení">
                         <FormControlLabel
                             label="V" labelPlacement="top" className={classes.checkbox} control={
-                                <Checkbox color="primary" onChange={(event => update("manager", event.target.checked))}
-                                          checked={contact.manager} value={contact.manager}/>
-                            }
+                            <Checkbox color="primary" onChange={(event => update("manager", event.target.checked))}
+                                      checked={contact.manager} value={contact.manager}/>
+                        }
                         />
                     </Tooltip>
                     <Tooltip title="Cvičitel">
                         <FormControlLabel
                             label="C" labelPlacement="top" className={classes.checkbox} control={
-                                <Checkbox color="primary"
-                                          onChange={(event => update("instructor", event.target.checked))}
-                                          checked={contact.instructor} value={contact.instructor}/>
-                            }
+                            <Checkbox color="primary"
+                                      onChange={(event => update("instructor", event.target.checked))}
+                                      checked={contact.instructor} value={contact.instructor}/>
+                        }
                         />
                     </Tooltip>
                     <Tooltip title="Masér">
                         <FormControlLabel
                             label="M" labelPlacement="top" className={classes.checkbox} control={
-                                <Checkbox color="primary" onChange={(event => update("masseur", event.target.checked))}
-                                          checked={contact.masseur} value={contact.masseur}/>
-                            }
+                            <Checkbox color="primary" onChange={(event => update("masseur", event.target.checked))}
+                                      checked={contact.masseur} value={contact.masseur}/>
+                        }
                         />
                     </Tooltip>
                     <Tooltip title="Trenér">
                         <FormControlLabel
                             label="T" labelPlacement="top" className={classes.checkbox} control={
-                                <Checkbox color="primary" onChange={(event => update("trainer", event.target.checked))}
-                                          checked={contact.trainer} value={contact.trainer}/>
-                            }
+                            <Checkbox color="primary" onChange={(event => update("trainer", event.target.checked))}
+                                      checked={contact.trainer} value={contact.trainer}/>
+                        }
                         />
                     </Tooltip>
                     <Tooltip title="Správce SG">
                         <FormControlLabel
                             label="SG" labelPlacement="top" className={classes.checkbox} control={
-                                <Checkbox color="primary"
-                                          onChange={(event => update("siliconGym", event.target.checked))}
-                                          checked={contact.siliconGym} value={contact.siliconGym}/>
-                            }
+                            <Checkbox color="primary"
+                                      onChange={(event => update("siliconGym", event.target.checked))}
+                                      checked={contact.siliconGym} value={contact.siliconGym}/>
+                        }
                         />
                     </Tooltip>
                     <Tooltip title="Správce blokpos">
                         <FormControlLabel
                             label="BP" labelPlacement="top" className={classes.checkbox} control={
-                                <Checkbox color="primary" onChange={(event => update("blockGym", event.target.checked))}
-                                          checked={contact.blockGym} value={contact.blockGym}/>
-                            }
+                            <Checkbox color="primary" onChange={(event => update("blockGym", event.target.checked))}
+                                      checked={contact.blockGym} value={contact.blockGym}/>
+                        }
                         />
                     </Tooltip>
                 </FormGroup>

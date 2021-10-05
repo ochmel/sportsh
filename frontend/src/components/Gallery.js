@@ -5,14 +5,11 @@ import 'react-slideshow-image/dist/styles.css'
 import {withWidth} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
-function Gallery({images, width})
-{
+function Gallery({images, width}) {
     const classes = useStyles();
 
-    function getWidth()
-    {
-        switch (width)
-        {
+    function getWidth() {
+        switch (width) {
             case 'xs':
                 return '100%';
             case 'sm':

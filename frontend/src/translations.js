@@ -1,10 +1,8 @@
-export function getText(key, isCzech)
-{
+export function getText(key, isCzech) {
     return isCzech ? czech[key] : english[key] ?? "";
 }
 
-export function getPositionTranslation(key)
-{
+export function getPositionTranslation(key) {
     let functions = {
         "Vedoucí sportovní sekce": 'Head of sports section',
         "Trenér fitcentra Silicon Gym": 'Silicon Gym personal trainer',
@@ -113,12 +111,12 @@ const czech = {
     'oldPhotoNotDeleted': 'Nepodařilo se smazat starou fotku.',
     'contactsEditable': 'Editační mód',
     'todo': 'Připravuje se',
-    'management' : "Vedení",
+    'management': "Vedení",
     'masseurs': 'Maséři',
-    'instructors' : "Cvičitelé",
+    'instructors': "Cvičitelé",
     'trainers': "Trenéři",
     'siliconGymAdmins': "Správci Silicon Gymu",
-    'blockGymsAdmins':  "Správci blokových posiloven",
+    'blockGymsAdmins': "Správci blokových posiloven",
 }
 
 const english = {
@@ -201,10 +199,10 @@ const english = {
     'todo': 'Under construction',
     'management': 'Management',
     'masseurs': 'Masseurs',
-    'instructors' : 'Group lesson instructors',
+    'instructors': 'Group lesson instructors',
     'trainers': 'Personal trainers',
     'siliconGymAdmins': 'Admins of silicon gym',
-    'blockGymsAdmins':  'Admins of block gyms',
+    'blockGymsAdmins': 'Admins of block gyms',
 }
 
 

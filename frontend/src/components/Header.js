@@ -15,27 +15,25 @@ import cz from "../resources/cz.png";
 import en from "../resources/en.png";
 import {getText} from "../translations";
 
-function Header({width, toggleLanguage, isCzech})
-{
+function Header({width, toggleLanguage, isCzech}) {
     const classes = useStyles();
     const [menuOpen, setMenuOpen] = useState(false);
 
-    function menuButtonClick(link)
-    {
-        scrollToLink(link);
+    function menuButtonClick(section) {
+        window.history.pushState({}, "Silicon Hill Sport", window.location.origin + "/" + section)
+        scrollToLink(section);
         setMenuOpen(false);
     }
 
-    function getButtons()
-    {
+    function getButtons() {
         return [
-            <Button key={0} color="inherit" onClick={() => menuButtonClick('#news')} className={classes.button}>
+            <Button key={0} color="inherit" onClick={() => menuButtonClick('news')} className={classes.button}>
                 {getText('news', isCzech)}
             </Button>,
-            <Button key={1} color="inherit" onClick={() => menuButtonClick('#gyms')} className={classes.button}>
+            <Button key={1} color="inherit" onClick={() => menuButtonClick('gyms')} className={classes.button}>
                 Sport
             </Button>,
-            <Button key={2} color="inherit" onClick={() => menuButtonClick('#contacts')} className={classes.button}>
+            <Button key={2} color="inherit" onClick={() => menuButtonClick('contacts')} className={classes.button}>
                 {getText('contacts', isCzech)}
             </Button>,
             <Button key={3} color="inherit" href="https://reservations.siliconhill.cz" target="_blank"

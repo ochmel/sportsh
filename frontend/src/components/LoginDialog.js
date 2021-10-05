@@ -13,15 +13,13 @@ import {getText} from "../translations";
 
 const defaultCredentials = {username: '', password: ''};
 
-export default function LoginDialog({isCzech, setOpen, open, loginFinished})
-{
+export default function LoginDialog({isCzech, setOpen, open, loginFinished}) {
     const [credentials, setCredentials] = useState(defaultCredentials)
     const [loading, setLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const classes = useStyles();
 
-    function handleLogin()
-    {
+    function handleLogin() {
         setIsError(false);
         setLoading(true);
         fetch('/authenticate', {
@@ -31,18 +29,14 @@ export default function LoginDialog({isCzech, setOpen, open, loginFinished})
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(response =>
-        {
-            if (response.ok)
-            {
-                response.json().then(data =>
-                {
+        }).then(response => {
+            if (response.ok) {
+                response.json().then(() => {
                     setLoading(false);
                     setCredentials(defaultCredentials);
                     loginFinished();
                 })
-            } else
-            {
+            } else {
                 setLoading(false);
                 setIsError(true);
             }

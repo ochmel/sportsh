@@ -4,8 +4,7 @@ import Link from "@material-ui/core/Link";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 
-export default function Footer()
-{
+export default function Footer() {
     const classes = useStyles();
 
     return (

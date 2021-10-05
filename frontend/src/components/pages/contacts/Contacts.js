@@ -11,16 +11,16 @@ import {ContactsTable} from "./ContactsTable";
 import ContactsGrid from "./ContactsGrid";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import {IconButton, Tooltip} from "@material-ui/core";
+import {AccountCircle} from "@material-ui/icons";
 
-export function Alert(props)
-{
+export function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const defaultSnack = {message: '', open: false, severity: 'info'};
 
-export default function Contacts({isCzech})
-{
+export default function Contacts({isCzech}) {
     const classes = useStyles();
     const [loginOpened, setLoginOpened] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
@@ -31,89 +31,70 @@ export default function Contacts({isCzech})
 
     useEffect(() => getContacts(true), [])
 
-    function getContacts(firstLoad)
-    {
+    function getContacts(firstLoad) {
         fetch('/content/5f267b11198f1f4ad132c57d', {
             method: 'get',
             mode: 'cors',
             headers: {'Content-Type': 'application/json'}
-        }).then(response =>
-        {
-            if (response.ok)
-            {
-                response.json().then(data =>
-                {
+        }).then(response => {
+            if (response.ok) {
+                response.json().then(data => {
                     let parsed = JSON.parse(data.content);
-                    if (firstLoad)
-                    {
+                    if (firstLoad) {
                         save(parsed, false, true)
                     }
                     setContacts(parsed)
                 })
-            } else
-            {
+            } else {
                 setSnack({message: getText('getContactsError', isCzech), open: true, severity: 'error'})
                 setContacts([])
             }
         })
     }
 
-    function handleClose(event, reason)
-    {
-        if (reason === 'clickaway')
-        {
+    function handleClose(event, reason) {
+        if (reason === 'clickaway') {
             return;
         }
 
         setSnack(defaultSnack);
     }
 
-    function loginFinished()
-    {
+    function loginFinished() {
         setContactsEditable(true);
         setLoggedIn(true);
         setLoginOpened(false);
     }
 
-    function save(data, shouldNotify, firstLoad)
-    {
+    function save(data, shouldNotify, firstLoad) {
         fetch('/content', {
             method: 'put',
             body: JSON.stringify({id: '5f267b11198f1f4ad132c57d', content: JSON.stringify(data)}),
             mode: 'cors',
             headers: {'Content-Type': 'application/json'}
-        }).then(response =>
-        {
-            if (response.ok)
-            {
-                if (shouldNotify)
-                {
+        }).then(response => {
+            if (response.ok) {
+                if (shouldNotify) {
                     setSnack({message: getText('putContactsSuccess', isCzech), open: true, severity: 'success'});
                 }
-                if (firstLoad)
-                {
+                if (firstLoad) {
                     setContactsEditable(true);
                     setLoggedIn(true);
                 }
-            } else if (response.status === 403)
-            {
-                if (!firstLoad)
-                {
+            } else if (response.status === 403) {
+                if (!firstLoad) {
                     setSnack({message: getText('putContacts403', isCzech), open: true, severity: 'error'})
                 }
                 setLoggedIn(false);
-            } else
-            {
+            } else {
                 setSnack({message: getText('putContactsError', isCzech), open: true, severity: 'error'})
             }
         })
     }
 
-    function updateContacts(updatedContacts, shouldSave)
-    {
+    function updateContacts(updatedContacts, shouldSave) {
         setContacts(updatedContacts);
-        if (shouldSave)
-        {
+        if (shouldSave) {
             save(updatedContacts, false);
         }
     }
@@ -122,8 +103,13 @@ export default function Contacts({isCzech})
         <div className={classes.root}>
             <div className={classes.heading}>
                 <Typography variant='h3' className={classes.headingText}>
-                    <div onClick={() => setLoginOpened(true)}>{getText('contacts', isCzech)}</div>
+                    <div>{getText('contacts', isCzech)}</div>
                 </Typography>
+                <Tooltip title="Admin login" arrow>
+                    <IconButton onClick={() => setLoginOpened(true)}>
+                        <AccountCircle color={loggedIn ? "primary" : undefined} fontSize="large"/>
+                    </IconButton>
+                </Tooltip>
             </div>
             <LoginDialog isCzech={isCzech} open={loginOpened} setOpen={setLoginOpened} loginFinished={loginFinished}/>
             <div className={classes.emails}>
@@ -192,6 +178,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
+        justifyContent: "space-between",
         [theme.breakpoints.down('sm')]: {
             padding: '4vh 4vh 0 1.5vh',
         }

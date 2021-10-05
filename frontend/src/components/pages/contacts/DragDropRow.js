@@ -3,13 +3,12 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import React from "react";
 import {Draggable} from "react-beautiful-dnd";
 
-const DraggableComponent = (id, index) => (props) =>
-{
+const DraggableComponent = (id, index) => (props) => {
     return (
         <Draggable draggableId={id} index={index}>
             {provided => (
                 <TableRow ref={provided.innerRef} {...provided.draggableProps}
-                    {...provided.dragHandleProps} {...props}
+                          {...provided.dragHandleProps} {...props}
                 >
                     {props.children}
                 </TableRow>
@@ -18,8 +17,7 @@ const DraggableComponent = (id, index) => (props) =>
     )
 }
 
-export default function DragDropRow({contact, index, remove})
-{
+export default function DragDropRow({contact, index, remove}) {
     return (
         <TableRow component={DraggableComponent(contact.id, index)}>
             <TableCell>

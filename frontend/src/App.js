@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {makeStyles} from "@material-ui/core/styles";
 import First from "./resources/cover.jpg";
@@ -10,15 +10,22 @@ import Contacts from "./components/pages/contacts/Contacts";
 import Logo from "../src/resources/logo.png"
 import {getText} from "./translations";
 import Footer from "./components/Footer";
+import {scrollToLink} from "./functions";
 
-export default function App()
-{
+export default function App() {
     const classes = useStyles();
     //true is czech language, false is english language
     const [isCzech, setIsCzech] = useState(true)
 
+    useEffect(() => {
+        const pathname = window.location.pathname
+        if (pathname) {
+            scrollToLink(pathname.replace("/", ""));
+        }
+    }, [])
+
     return (
-        <React.Fragment>
+        <>
             <Header toggleLanguage={() => setIsCzech(!isCzech)} isCzech={isCzech}/>
             <div className={classes.first}>
                 <div className={classes.logo}>
@@ -32,7 +39,7 @@ export default function App()
             <div id="contacts"/>
             <Contacts isCzech={isCzech}/>
             <Footer/>
-        </React.Fragment>
+        </>
     );
 }
 

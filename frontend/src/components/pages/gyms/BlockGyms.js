@@ -31,23 +31,19 @@ const cameras = ["http://kamery-nahled.sh.cvut.cz/pos3.jpg", "http://kamery-nahl
     "http://kamery-nahled.sh.cvut.cz/pos9.jpg", "http://kamery-nahled.sh.cvut.cz/pos10.jpg",
     "http://kamery-nahled.sh.cvut.cz/pos11.jpg"];
 
-export default function BlockGyms({isCzech})
-{
+export default function BlockGyms({isCzech}) {
     const classes = useStyles();
     const [tabIndex, setTabIndex] = useState(0);
     const [expanded, setExpanded] = useState(false);
     const [gymViews, setGymViews] = useState(cameras);
 
-    function handleTabChange(tabIndex)
-    {
+    function handleTabChange(tabIndex) {
         setTabIndex(tabIndex);
         setExpanded(true);
     }
 
-    useEffect(() =>
-    {
-        let interval = setInterval(() =>
-        {
+    useEffect(() => {
+        let interval = setInterval(() => {
             let timestamp = Date.now();
             setGymViews([
                 cameras[0] + '?timestamp=' + timestamp,
@@ -251,8 +247,8 @@ const useStyles = makeStyles((theme) => ({
             '0px 9px 12px 1px rgba(63,81,181,0.28), ' +
             '0px 3px 16px 2px rgba(63,81,181,0.46)',
     },
-    cameraText:{
-      margin: theme.spacing(1.5),
+    cameraText: {
+        margin: theme.spacing(1.5),
     },
     description: {
         marginLeft: theme.spacing(4),
