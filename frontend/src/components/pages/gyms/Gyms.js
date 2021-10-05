@@ -8,7 +8,7 @@ import {withStyles} from "@material-ui/core";
 import SiliconGym from "./SiliconGym";
 import BlockGyms from "./BlockGyms";
 import Boulder from "./Boulder";
-import {getText} from "../../../translations";
+import {getText} from "../../../tools/translations";
 import Link from "@material-ui/core/Link";
 
 export const Accordion = withStyles((theme) => ({

@@ -11,6 +11,7 @@ import TSO from "../../../resources/tso.jpg"
 import SHSM from "../../../resources/shsm.jpg"
 import SUZ from "../../../resources/suz.gif"
 import Stanmark from "../../../resources/stanmark.jpg"
+import VasConstruct from "../../../resources/logo-vasconstruct.jpg"
 import Workout from "../../../resources/workout.png"
 import sg2 from "../../../resources/sgGallery/2.jpg";
 import sg3 from "../../../resources/sgGallery/3.jpg";
@@ -22,7 +23,7 @@ import sg8 from "../../../resources/sgGallery/8.jpg";
 import sg9 from "../../../resources/sgGallery/9.jpg";
 import sg10 from "../../../resources/sgGallery/10.jpg";
 import Gallery from "../../Gallery";
-import {getText} from "../../../translations";
+import {getText} from "../../../tools/translations";
 
 let siliconGymViews = ["http://kamery-nahled.sh.cvut.cz/fit2-stred.jpg", "http://kamery-nahled.sh.cvut.cz/fit2-drepy.jpg", "http://kamery-nahled.sh.cvut.cz/fit2-scott.jpg"]
 
@@ -123,13 +124,15 @@ export default function SiliconGym({isCzech}) {
                 <TabPanel index={tabIndex} value={3} className={classes.article}>
                     <div className={classes.partners}>
                         <img className={classes.partnersLogo} src={SUZ} alt={getText('suz', isCzech)}
-                             onClick={() => window.open('https://www.suz.cvut.cz/', '_blank')}/>
+                             onClick={() => window.open('https://www.suz.cvut.cz', '_blank')}/>
                         <img className={classes.partnersLogo} src={TSO} alt={getText('tso', isCzech)}
-                             onClick={() => window.open('https://skolatreneru.cz/', '_blank')}/>
+                             onClick={() => window.open('https://skolatreneru.cz', '_blank')}/>
                         <img className={classes.partnersLogo} src={Stanmark} alt={getText('stanmark', isCzech)}
-                             onClick={() => window.open('https://posilovaci-stroje.org//', '_blank')}/>
+                             onClick={() => window.open('https://posilovaci-stroje.org', '_blank')}/>
+                        <img className={classes.partnersLogo} src={VasConstruct} alt={getText('vasConstruct', isCzech)}
+                             onClick={() => window.open('https://vas-construct.cz', '_blank')}/>
                         <img className={classes.partnersLogo} src={Workout} alt={getText('workout', isCzech)}
-                             onClick={() => window.open('https://www.workout.eu/', '_blank')}/>
+                             onClick={() => window.open('https://www.workout.eu', '_blank')}/>
                         <img className={classes.partnersLogo} src={SHSM} alt={getText('shsm', isCzech)}
                              onClick={() => window.open('https://www.facebook.com/siliconhillstrongestman', '_blank')}/>
                     </div>

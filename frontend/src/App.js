@@ -8,25 +8,38 @@ import Gyms from "./components/pages/gyms/Gyms";
 import News from "./components/pages/News";
 import Contacts from "./components/pages/contacts/Contacts";
 import Logo from "../src/resources/logo.png"
-import {getText} from "./translations";
+import {getText} from "./tools/translations";
 import Footer from "./components/Footer";
-import {scrollToLink} from "./functions";
+import {getResultLanguage, PAGE_TITLE, scrollToLink} from "./tools/functions";
+
+const LANG_PARAM = "lang"
 
 export default function App() {
     const classes = useStyles();
     //true is czech language, false is english language
-    const [isCzech, setIsCzech] = useState(true)
+    const url = new URL(window.location.href)
+    const [isCzech, setIsCzech] = useState(url.searchParams.get(LANG_PARAM) !== "en")
 
     useEffect(() => {
         const pathname = window.location.pathname
         if (pathname) {
             scrollToLink(pathname.replace("/", ""));
         }
+        url.searchParams.set(LANG_PARAM, getResultLanguage(isCzech))
+        window.history.pushState({}, PAGE_TITLE, url.toString())
     }, [])
+
+    function toggleLanguage() {
+        const isCzechNewValue = !isCzech
+        setIsCzech(isCzechNewValue)
+        const url = new URL(window.location.href)
+        url.searchParams.set(LANG_PARAM, getResultLanguage(isCzechNewValue))
+        window.history.pushState({}, PAGE_TITLE, url.toString())
+    }
 
     return (
         <>
-            <Header toggleLanguage={() => setIsCzech(!isCzech)} isCzech={isCzech}/>
+            <Header toggleLanguage={toggleLanguage} isCzech={isCzech}/>
             <div className={classes.first}>
                 <div className={classes.logo}>
                     <img className={classes.img} src={Logo} alt={getText('shlogo', isCzech)}/>

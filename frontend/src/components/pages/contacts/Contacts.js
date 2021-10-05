@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import LoginDialog from "../../LoginDialog";
 import Button from "@material-ui/core/Button";
-import {getText} from "../../../translations";
+import {getText} from "../../../tools/translations";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from '@material-ui/lab/Alert';
 import {ContactsTable} from "./ContactsTable";

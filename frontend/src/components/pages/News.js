@@ -7,7 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Link from "@material-ui/core/Link";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CircularProgress from "@material-ui/core/CircularProgress";
-import {getText} from "../../translations";
+import {getText} from "../../tools/translations";
 
 graph.setVersion("7.0")
 graph.setAccessToken(process.env.REACT_APP_FB_TOKEN);

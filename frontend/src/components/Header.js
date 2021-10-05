@@ -5,7 +5,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import {makeStyles} from "@material-ui/core/styles";
-import {scrollToLink} from "../functions";
+import {PAGE_TITLE, scrollToLink} from "../tools/functions";
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from "@material-ui/core/IconButton";
 import {isWidthDown, withWidth} from "@material-ui/core";
@@ -13,14 +13,14 @@ import Drawer from "@material-ui/core/Drawer";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import cz from "../resources/cz.png";
 import en from "../resources/en.png";
-import {getText} from "../translations";
+import {getText} from "../tools/translations";
 
 function Header({width, toggleLanguage, isCzech}) {
     const classes = useStyles();
     const [menuOpen, setMenuOpen] = useState(false);
 
     function menuButtonClick(section) {
-        window.history.pushState({}, "Silicon Hill Sport", window.location.origin + "/" + section)
+        window.history.pushState({}, PAGE_TITLE, window.location.origin + "/" + section + (window.location.search?.toString() ?? ""))
         scrollToLink(section);
         setMenuOpen(false);
     }
@@ -31,14 +31,14 @@ function Header({width, toggleLanguage, isCzech}) {
                 {getText('news', isCzech)}
             </Button>,
             <Button key={1} color="inherit" onClick={() => menuButtonClick('gyms')} className={classes.button}>
-                Sport
+                {getText('gyms', isCzech)}
             </Button>,
             <Button key={2} color="inherit" onClick={() => menuButtonClick('contacts')} className={classes.button}>
                 {getText('contacts', isCzech)}
             </Button>,
             <Button key={3} color="inherit" href="https://reservations.siliconhill.cz" target="_blank"
                     className={classes.button}>
-                {getText('resSystem', isCzech)}
+                {getText('reservations', isCzech)}
             </Button>,
             <Button key={4} color="inherit" href="https://wiki.sh.cvut.cz/klub:sport" target="_blank"
                     className={classes.button}>
@@ -66,7 +66,7 @@ function Header({width, toggleLanguage, isCzech}) {
                         </Typography>
                     </div>
                     <div className={classes.rightSide}>
-                        {isWidthDown('sm', width)
+                        {isWidthDown('xs', width)
                             ?
                             <Drawer className={classes.wideButtons} anchor={'top'} open={menuOpen} variant='persistent'
                                     onClose={() => setMenuOpen(false)} PaperProps={{className: classes.paper}}
@@ -109,7 +109,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold'
     },
     menuButton: {
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.up('sm')]: {
             display: 'none',
         }
     },
@@ -140,6 +140,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(2),
         display: 'flex',
         alignItems: 'center',
+        fontWeight: 'bold'
     },
     language: {
         zoom: 0.5,

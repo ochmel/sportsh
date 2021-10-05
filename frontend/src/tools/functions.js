@@ -13,3 +13,9 @@ export function getPhotoUrl(id) {
     }
     return "";
 }
+
+export function getResultLanguage(isCzech) {
+    return isCzech ? "cs" : "en"
+}
+
+export const PAGE_TITLE = "Silicon Hill Sport"

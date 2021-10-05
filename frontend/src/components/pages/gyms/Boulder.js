@@ -7,7 +7,7 @@ import TabPanel from "../../TabPanel";
 import Link from "@material-ui/core/Link";
 import {makeStyles} from "@material-ui/core/styles";
 import SGImage from "../../../resources/boulder.jpg";
-import {getText} from "../../../translations";
+import {getText} from "../../../tools/translations";
 import Gallery from "../../Gallery";
 import bo1 from "../../../resources/boulder/2.jpg";
 

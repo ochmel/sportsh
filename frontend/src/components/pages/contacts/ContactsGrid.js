@@ -5,9 +5,9 @@ import Avatar from "@material-ui/core/Avatar";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import {getPositionTranslation, getText} from "../../../translations";
+import {getPositionTranslation, getText} from "../../../tools/translations";
 import CardContent from "@material-ui/core/CardContent";
-import {getPhotoUrl} from "../../../functions";
+import {getPhotoUrl} from "../../../tools/functions";
 
 export default function ContactsGrid({isCzech, contacts}) {
     const classes = useStyles();

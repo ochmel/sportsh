@@ -22,7 +22,7 @@ import b10 from "../../../resources/blockGallery/b10.jpg";
 import b11 from "../../../resources/blockGallery/b11.jpg";
 import b112 from "../../../resources/blockGallery/b11_2.jpg";
 import Gallery from "../../Gallery";
-import {getText} from "../../../translations";
+import {getText} from "../../../tools/translations";
 
 
 const cameras = ["http://kamery-nahled.sh.cvut.cz/pos3.jpg", "http://kamery-nahled.sh.cvut.cz/pos4.jpg",
