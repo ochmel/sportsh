@@ -65,10 +65,13 @@ export default function Gyms({isCzech}) {
                     Silicon Hill Strongest Man
                 </Link>
                 {getText('mainDesc2', isCzech)}
-                <Link href="http://show.siliconhill.cz/" target="_blank" color='inherit' className={classes.link}>
+                <Link href="https://show.siliconhill.cz/" target="_blank" color='inherit' className={classes.link}>
                     SHOW Strahov
                 </Link>
                 {getText('mainDesc3', isCzech)}
+                <Link href="https://wiki.sh.cvut.cz/klub:sport" target="_blank" color='inherit' className={classes.link}>
+                    wiki.
+                </Link>
             </Typography>
             {/*</Paper>*/}
             <SiliconGym isCzech={isCzech}/>

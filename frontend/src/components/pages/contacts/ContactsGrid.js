@@ -46,22 +46,45 @@ export default function ContactsGrid({isCzech, contacts}) {
         return contactsMap;
     }
 
+    function getSection(contacts, sectionName) {
+        if (contacts.length > 0) {
+            return (
+                <>
+                    {sectionName}
+                    {contacts}
+                </>
+            )
+        }
+    }
+
     function generateGrid(contactsMap) {
         return (
-            <React.Fragment>
-                {getSeparator('management')}
-                {contactsMap.management.map(manager => getCard(manager, true))}
-                {getSeparator('instructors')}
-                {contactsMap.instructors.map(instructor => getCard(instructor))}
-                {getSeparator('masseurs')}
-                {contactsMap.masseurs.map(masseur => getCard(masseur))}
-                {getSeparator('trainers')}
-                {contactsMap.trainers.map(trainer => getCard(trainer))}
-                {getSeparator('siliconGymAdmins')}
-                {contactsMap.siliconGymAdmins.map(admin => getCard(admin, true))}
-                {getSeparator('blockGymsAdmins')}
-                {contactsMap.blockGymsAdmins.map(admin => getCard(admin, true))}
-            </React.Fragment>
+            <>
+                {getSection(
+                    contactsMap.management.map(manager => getCard(manager, true)),
+                    getSeparator('management')
+                )}
+                {getSection(
+                    contactsMap.instructors.map(instructor => getCard(instructor)),
+                    getSeparator('instructors')
+                )}
+                {getSection(
+                    contactsMap.masseurs.map(masseur => getCard(masseur)),
+                    getSeparator('masseurs')
+                )}
+                {getSection(
+                    contactsMap.trainers.map(trainer => getCard(trainer)),
+                    getSeparator('trainers')
+                )}
+                {getSection(
+                    contactsMap.siliconGymAdmins.map(admin => getCard(admin, true)),
+                    getSeparator('siliconGymAdmins')
+                )}
+                {getSection(
+                    contactsMap.blockGymsAdmins.map(admin => getCard(admin, true)),
+                    getSeparator('blockGymsAdmins')
+                )}
+            </>
         )
     }
 
