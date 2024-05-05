@@ -77,8 +77,11 @@ export default function BlockGyms({isCzech}) {
                                 <Chip label={getText('desc', isCzech)} variant="outlined" className={classes.chip}
                                       clickable={false} onClick={() => handleTabChange(0)}
                                 />
-                                <Chip label={getText('view', isCzech)} variant="outlined" className={classes.chip}
+                                <Chip label={getText('virtualTour', isCzech)} variant="outlined" className={classes.chip}
                                       clickable={false} onClick={() => handleTabChange(1)}
+                                />
+                                <Chip label={getText('view', isCzech)} variant="outlined" className={classes.chip}
+                                      clickable={false} onClick={() => handleTabChange(2)}
                                 />
                                 <Chip label={getText('gal', isCzech)} variant="outlined" className={classes.chip}
                                       clickable={false} onClick={() => handleTabChange(3)}
@@ -102,7 +105,13 @@ export default function BlockGyms({isCzech}) {
                         </Link>.
                     </Typography>
                 </TabPanel>
-                <TabPanel index={tabIndex} value={1} className={classes.view}>
+                <TabPanel index={tabIndex} value={1} className={classes.article}>
+                    <iframe width="100%" height="800" frameBorder="0" allowFullScreen
+                            src="https://tourmkr.com/F1lVR45Z3u" referrerPolicy="no-referrer">
+
+                    </iframe>
+                </TabPanel>
+                <TabPanel index={tabIndex} value={2} className={classes.view}>
                     <div className={classes.cameraRow}>
                         <div className={classes.cameraContainer}>
                             <img className={classes.camera} src={gymViews[0]}
