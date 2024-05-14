@@ -1,7 +1,6 @@
 import Typography from "@material-ui/core/Typography";
 import React, {useEffect, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
-import graph from 'fb-react-sdk';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Link from "@material-ui/core/Link";
@@ -9,22 +8,26 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {getText} from "../../tools/translations";
 
-graph.setVersion("7.0")
-graph.setAccessToken(process.env.REACT_APP_FB_TOKEN);
-
 export default function News({isCzech}) {
     const classes = useStyles();
     const [postsWrapper, setPostsWrapper] = useState(null);
     const [displayedPostsCount, setDisplayedPostsCount] = useState(5)
     const [fbError, setFbError] = useState(false);
     useEffect(() => {
-        graph.get("386058205223204/posts?fields=full_picture,message,permalink_url", (error, response) => {
-            if (error != null) {
-                setFbError(true);
+        fetch(`https://graph.facebook.com/v19.0/386058205223204/posts?fields=full_picture,message,permalink_url&access_token=${process.env.REACT_APP_FB_TOKEN}`, {
+            method: 'get',
+            headers: {'Content-Type': 'application/json'}
+        }).then(response => {
+            if (response.ok) {
+                response.json().then(data => {
+                    setPostsWrapper(data)
+                })
             } else {
-                setPostsWrapper(response)
+                setFbError(true);
             }
-        });
+        }).catch(e => {
+            setFbError(e)
+        })
     }, [])
 
     function routeToFb(link) {
@@ -34,8 +37,19 @@ export default function News({isCzech}) {
     function showMore() {
         let newCount = displayedPostsCount + 5;
         if (newCount > postsWrapper.data.length) {
-            graph.get(postsWrapper.paging.next, (error, response) => {
-                setPostsWrapper({...postsWrapper, data: [...postsWrapper.data, ...response.data]});
+            fetch(postsWrapper.paging.next, {
+                method: 'get',
+                headers: {'Content-Type': 'application/json'}
+            }).then(response => {
+                if (response.ok) {
+                    response.json().then(data => {
+                        setPostsWrapper({...postsWrapper, data: [...postsWrapper.data, ...data.data]});
+                    })
+                } else {
+                    setFbError(true);
+                }
+            }).catch(e => {
+                setFbError(e)
             })
         }
         setDisplayedPostsCount(newCount);
